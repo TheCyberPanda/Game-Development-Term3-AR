@@ -11,4 +11,13 @@ public class Projectile : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody>();
         _rb.AddRelativeForce(0, 0, 500);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!other.gameObject.CompareTag("Enemy")) return;
+        
+        //Will be reruning object to pool
+        Destroy(other.gameObject);
+        Destroy(this.gameObject);
+    }
 }
